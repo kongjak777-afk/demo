@@ -1,28 +1,26 @@
 package com.example.demo;
 
-import java.io.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import java.io.IOException;
 
-@WebServlet(name = "helloServlet", value = "/hello-servlet")
-public class HelloServlet extends HttpServlet {
-    private String message;
+@WebServlet(name = "loginservlet", value = "/login")
+public class LoginServlet extends HttpServlet {
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    public void init() {
-        message = "hi ~~~~ ";
-    }
+        String id = request.getParameter("id");
+        String pw = request.getParameter("pw");
+        // id: "user"   , pw : "1234"
+        if ("user".equals(id) && "1234".equals(pw)) {
+            response.sendRedirect("welcome.jsp?userName=" + id );
+        } else {
+            response.sendRedirect("loginForm.jsp?error=1");
+        }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html");
-
-        // Hello
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h1>" + message + "</h1>");
-        out.println("</body></html>");
-    }
-
-    public void destroy() {
     }
 }
