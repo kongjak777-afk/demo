@@ -10,7 +10,7 @@
     if ("1".equals(error)) {
 %>
 <p style="color: red">
-    id 또는 pw 틀렸읍니다
+    id 또는 pw가 틀렸습니다.
 </p>
 <%
     }
